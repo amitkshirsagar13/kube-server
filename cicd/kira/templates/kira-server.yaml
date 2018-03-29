@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kira-server
+  namespace: dev
+  labels:
+    app: kira-server
+    version: kira-server-{{.Values.commit}}
+spec:
+  replicas: {{.Values.scale}}
+  template:
+    metadata:
+      labels:
+        app: kira-server
+    spec:
+      containers:
+      - name: kira-server
+        image: amitkshirsagar13/shinigami:{{.Values.commit}}
+        ports:
+        - containerPort: 8988
+#        resources:
+#          requests:
+#            cpu: 100m
+#            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kira-server
+  namespace: dev
+spec:
+  ports:
+  - port: 80
+    targetPort: 8988
+  selector:
+    app: kira-server

@@ -1,0 +1,10 @@
+#!/bin/sh
+sudo chown poomit:poomit ~/.rnd
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout shinigami.key -out shinigami.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=Shinigami IO/CN=shinigami.io"
+
+helm install --name kube-lego --namespace kube-system stable/kube-lego --set config.LEGO_EMAIL=amit.kshirsagar.13@gmail.com,config.LEGO_URL=https://acme-v01.api.letsencrypt.org/directory
+
+kubectl create secret tls tls-cert --key shinigami.key --cert shinigami.crt
+kubectl create secret tls dev --key shinigami.key --cert shinigami.crt --namespace dev
+kubectl create secret tls qa --key shinigami.key --cert shinigami.crt --namespace qa
+kubectl create secret tls jenkins-tls --key shinigami.key --cert shinigami.crt --namespace jenkins

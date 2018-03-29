@@ -1,0 +1,14 @@
+#!/bin/sh
+#kubectl --namespace nginx run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+#kubectl expose deployment echoserver --type=NodePort --namespace nginx
+
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --type=NodePort --namespace dev
+
+kubectl --namespace qa run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --type=NodePort --namespace qa
+
+
+kubectl --namespace dev run kira --image=amitkshirsagar13/shinigami:latest --port=8988
+kubectl expose deployment kira --type=NodePort --namespace dev
+https://kira.dev.shinigami.io/greeting

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: dev.nginx
+  namespace: dev
+spec:
+  tls:
+  - hosts:
+    - echoserver.dev.shinigami.io
+  - secretName: dev
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: echoserver.dev.shinigami.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /

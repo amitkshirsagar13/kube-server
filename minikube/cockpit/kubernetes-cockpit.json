@@ -1,0 +1,70 @@
+{
+   "kind":"List",
+   "apiVersion":"v1",
+   "items":[
+      {
+         "kind":"ReplicationController",
+         "apiVersion":"v1",
+         "metadata":{
+            "namespace":"kube-system",
+            "name":"kubernetes-cockpit",
+            "labels":{
+               "name":"kubernetes-cockpit"
+            }
+         },
+         "spec":{
+            "replicas":1,
+            "selector":{
+               "name":"kubernetes-cockpit"
+            },
+            "template":{
+               "metadata":{
+                  "namespace":"kube-system",
+                  "labels":{
+                     "name":"kubernetes-cockpit"
+                  }
+               },
+               "spec":{
+                  "containers":[{
+                    "name": "kubernetes-cockpit",
+                    "image": "cockpit/kubernetes:latest",
+                    "ports":[{
+                        "containerPort":9090,
+                        "protocol":"TCP"
+                     }],
+                    "env":[{
+                        "name": "KUBE_INSECURE",
+                        "value": "true"
+                    },{
+                        "name": "COCKPIT_KUBE_INSECURE",
+                        "value": "true"
+                    }]
+                  }]
+               }
+            }
+         }
+      },
+      {
+         "kind":"Service",
+         "apiVersion":"v1",
+         "metadata":{
+            "namespace":"kube-system",
+            "name":"kubernetes-cockpit",
+            "labels":{
+               "name":"kubernetes-cockpit"
+            }
+         },
+         "spec":{
+             "type": "ClusterIP",
+             "ports": [{
+                 "protocol": "TCP",
+                 "port": 9090,
+                 "targetPort": 9090
+             }],
+            "selector":{
+               "name":"kubernetes-cockpit"
+            }
+         }
+      }
+   ]
+}

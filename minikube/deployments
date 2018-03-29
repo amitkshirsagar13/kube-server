@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -z "$1" ]
+then
+	kubectl get deployments --namespace $1
+else
+	kubectl get deployments --all-namespaces
+fi
+

@@ -1,0 +1,4 @@
+scale: 2
+application: demo-server
+branch: dev
+commit: latest

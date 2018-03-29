@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    def branch = ''
+    def commitSha = ''
+    stages {
+        stage('Checkout') {
+            steps {
+                def scmVars = checkout scm
+                branch = scmVars.GIT_BRANCH
+                //branch = branch.replace(target "*/", replacement "")
+                commmitBra = scmVars.GIT_COMMIT
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building from demo folder jenkins file..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('DockerImage') {
+            steps {
+                echo 'Building Docker Image..'
+                def imageRegistry = 'gcr.io/basekube/demo'
+                sh 'gcloud container builds submit --tag $imageRegistry/demo-server:$commitSha'
+            }
+        }
+        stage('Deploy application') {
+            steps {
+                echo 'Deploying application....'
+                def namespace = 'demo-server-$branch'
+                sh 'helm install cicd/kira --name kira --namespace dev --set commit=latest'
+            }
+        }
+    }
+}

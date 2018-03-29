@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: demo-server.{{.Values.branch}}
+  namespace: {{.Values.branch}}
+  labels:
+    version: demo-server-{{.Values.commit}}
+spec:
+  tls:
+  - hosts:
+    - demo.{{.Values.branch}}.shinigami.io
+  - secretName: {{.Values.branch}}
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: demo.{{.Values.branch}}.shinigami.io
+      http:
+        paths:
+          - backend:
+              serviceName: demo-server
+              servicePort: 8989
+            path: /

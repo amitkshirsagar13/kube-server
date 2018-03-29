@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -z "$1" ]
+then
+	kubectl describe ing $1 --namespace $1
+else
+	kubectl describe ing --all-namespaces
+fi
+

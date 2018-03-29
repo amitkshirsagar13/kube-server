@@ -1,0 +1,2 @@
+#!/bin/sh
+nohup sudo python /opt/cloud/minikube/dnsproxy.py -s 8.8.8.8 &

@@ -1,0 +1,49 @@
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.6.2-linux-amd64.tar.gz
+tar zxfv helm-v2.6.2-linux-amd64.tar.gz
+cp linux-amd64/helm .
+./helm init
+./helm update
+export PROJECT=$(gcloud info --format='value(config.project)')
+
+Enable helm to connect and install apps
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+dnsproxy.py with host entry as below
+127.0.0.1 *.shinigami.io
+
+Need to run minikube as root
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
+
+Route local traffic from 0.0.0.0 to Guest port nginx 80/443 node ports30080/30443
+
+
+
+
+Jenkins Setup:
+kubectl delete PersistentVolumeClaim jenkins
+kubectl delete Secret jenkins
+helm delete --purge jenkins
+helm install --name jenkins --namespace jenkins stable/jenkins
+kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+printf $(kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+
+
+Jenkins Kubernetes Settings:
+Kubernetes Namespace: jenkins
+Credentials: jenkins (Kubernetes Service Account)
+Kubernetes Pod Template:
+Name: default
+Namespace: jenkins
+
+Time in Idle retain Slave: 120
+Time in Sec for Pod deadline: 3600
+Timeout in seconds for Jenkins connection: 3600
+
+
+pods:
+https://github.com/janakiramm/Kubernetes-multi-container-pod
+

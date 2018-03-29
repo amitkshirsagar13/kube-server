@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: kube-system.cockpit
+  namespace: kube-system
+spec:
+  tls:
+  - hosts:
+    - cockpit.kube-system.shinigami.io
+  - secretName: tls-cert
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: cockpit.kube-system.shinigami.io
+      http:
+        paths:
+          - backend:
+              serviceName: kubernetes-cockpit
+              servicePort: 9090
+            path: /
