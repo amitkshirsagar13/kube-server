@@ -26,7 +26,7 @@ volumes: [
        echo "Building Project...$gitBranch:$shortGitCommit"
 
        // execute maven
-       sh "${mvnTool}/bin/mvn -Dmaven.test.skip=true clean install"
+       sh "${mvnTool}/bin/mvn -Dmaven.test.skip=true install"
        
     }    
     stage('Create Docker images and Push') {
