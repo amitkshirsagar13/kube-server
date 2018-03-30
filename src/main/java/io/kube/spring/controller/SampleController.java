@@ -1,5 +1,7 @@
 package io.kube.spring.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,11 @@ public class SampleController {
 	@RequestMapping(value = "/api/hello", method = RequestMethod.GET, produces = "application/json")
 	public HelloWorld list(@RequestParam(name = "name") String name) throws Exception {
 		return messageService.save(new HelloWorld().setName(name));
+	}
+
+	@RequestMapping(value = "/api/listAll", method = RequestMethod.GET, produces = "application/json")
+	public List<HelloWorld> list() throws Exception {
+		return messageService.findAll();
 	}
 
 }
