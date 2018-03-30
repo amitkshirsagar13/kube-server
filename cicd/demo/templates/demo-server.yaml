@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: demo-server
+  name: {{.Values.application}}
   namespace: {{.Values.branch}}
   labels:
-    app: demo-server
-    version: demo-server-{{.Values.commit}}
+    app: {{.Values.application}}
+    version: "{{.Values.application}}-{{.Values.commit}}"
 spec:
   replicas: {{.Values.scale}}
   template:
     metadata:
       labels:
-        app: demo-server
+        app: {{.Values.application}}
     spec:
       containers:
-      - name: demo-server
+      - name: {{.Values.application}}
         image: "amitkshirsagar13/{{.Values.application}}:{{.Values.commit}}"
         ports:
         - containerPort: 8989
@@ -26,12 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-server
+  name: {{.Values.application}}
   namespace: {{.Values.branch}}
 spec:
-  type: LoadBalancer
   ports:
   - port: 8089
     targetPort: 8989
   selector:
-    app: demo-server
+    app: {{.Values.application}}

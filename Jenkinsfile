@@ -17,8 +17,7 @@ volumes: [
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
     def shortGitCommit = "${gitCommit[0..10]}"
-    def mvnTool = tool 'maven3.5.3'
-    //def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+    def mvnTool = tool 'maven'
     def project = "basekube"
     def application = "demo-server"
     def dockerApp
@@ -26,7 +25,7 @@ volumes: [
        echo "Building Project...$gitBranch:$shortGitCommit"
 
        // execute maven
-       sh "${mvnTool}/bin/mvn -X -Dmaven.test.skip=true package"
+       sh "${mvnTool}/bin/mvn -Dmaven.test.skip=true clean install"
        
     }    
     stage('Create Docker images and Push') {
@@ -62,7 +61,9 @@ volumes: [
         sh "helm list"
         sh "pwd"
         sh "ls cicd"
-	sh "helm install --name $application --namespace dev ./cicd/demo/ --set branch=dev --set commit=latest --set application=$application"
+	//sh "helm delete --purge $application"
+	//sh "helm install --name $application --namespace dev ./cicd/demo/ --set branch=dev --set commit=latest --set application=$application"
+	sh "helm upgrade --install $application --namespace dev ./cicd/demo/ --set branch=dev --set commit=latest --set application=$application"
       }
     }
   }

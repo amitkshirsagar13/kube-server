@@ -8,7 +8,7 @@ NC=`tput sgr0`
 echo ""
 echo "${GC}Login Jenkins Page${NC}"
 
-echo "${BC}http://`services jenkins|grep 8080|tr -s " " "|"|cut -d "|" -f 4,5|cut -d ":" -f 1|tr -s "|" ":"`/login${NC}"
+echo "${BC}http://`services jenkins|grep LoadBalancer|tr -s " " "|"|cut -d "|" -f 4,5|cut -d ":" -f 1|tr -s "|" ":"`/login${NC}"
 echo ""
 echo "${RC}Password: ${GC}`printf $(kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo`${NC}"
 echo ""

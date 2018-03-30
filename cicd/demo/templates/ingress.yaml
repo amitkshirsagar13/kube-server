@@ -5,23 +5,23 @@ metadata:
     nginx.ingress.kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/tls-acme: "true"
-  name: demo-server.{{.Values.branch}}
+  name: "{{.Values.application}}.{{.Values.branch}}"
   namespace: {{.Values.branch}}
   labels:
-    version: demo-server-{{.Values.commit}}
+    version: "{{.Values.application}}-{{.Values.commit}}"
 spec:
   tls:
   - hosts:
-    - demo.{{.Values.branch}}.shinigami.io
+    - "{{.Values.application}}.{{.Values.branch}}.shinigami.io"
   - secretName: {{.Values.branch}}
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: demo.{{.Values.branch}}.shinigami.io
+    - host: "{{.Values.application}}.{{.Values.branch}}.shinigami.io"
       http:
         paths:
           - backend:
-              serviceName: demo-server
-              servicePort: 8989
+              serviceName: {{.Values.application}}
+              servicePort: 8089
             path: /

@@ -3,11 +3,8 @@ package io.kube.spring.controller;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import io.kube.spring.data.HelloWorld;
 
 /**
  * <p>
@@ -28,8 +25,7 @@ import io.kube.spring.data.HelloWorld;
  * </pre>
  */
 @RestController
-@RequestMapping(value = "/rest")
-public class SampleController {
+public class SwaggerController {
 
 	/**
 	 * log4j object for debugging.
@@ -45,10 +41,4 @@ public class SampleController {
 	public ModelAndView home() {
 		return new ModelAndView("redirect:" + "/swagger-ui.html");
 	}
-
-	@RequestMapping(value = "/api/hello", method = RequestMethod.GET, produces = "application/json")
-	public HelloWorld list(@RequestParam(name = "name") String name) throws Exception {
-		return new HelloWorld().setName(name);
-	}
-
 }
