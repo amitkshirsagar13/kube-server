@@ -1,5 +1,7 @@
 package io.kube.spring.data;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * <p>
  * <b>Overview:</b>
@@ -20,6 +22,8 @@ package io.kube.spring.data;
  */
 
 public class HelloWorld {
+	@Id
+	private String id;
 	private String name;
 	private String message;
 

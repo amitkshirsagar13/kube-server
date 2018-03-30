@@ -1,13 +1,14 @@
 package io.kube.spring.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import io.kube.spring.data.HelloWorld;
+import io.kube.spring.service.MessageService;
 
 /**
  * <p>
@@ -36,19 +37,12 @@ public class SampleController {
 	 */
 	private static Logger log4j = Logger.getLogger(SampleController.class);
 
-	@RequestMapping(value = "/swagger", method = RequestMethod.GET)
-	public ModelAndView swaggerui() {
-		return new ModelAndView("redirect:" + "/swagger-ui.html");
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
-		return new ModelAndView("redirect:" + "/swagger-ui.html");
-	}
+	@Autowired
+	private MessageService messageService;
 
 	@RequestMapping(value = "/api/hello", method = RequestMethod.GET, produces = "application/json")
 	public HelloWorld list(@RequestParam(name = "name") String name) throws Exception {
-		return new HelloWorld().setName(name);
+		return messageService.save(new HelloWorld().setName(name));
 	}
 
 }
