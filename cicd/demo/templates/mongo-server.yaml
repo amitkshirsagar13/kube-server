@@ -60,9 +60,10 @@ metadata:
   name: mongo
   namespace: {{.Values.branch}}
 spec:
+  type: NodePort
   ports:
     - port: 27017
-      targetPort: 27017
+      nodePort: 37017
   selector:
     name: mongo
 ---
