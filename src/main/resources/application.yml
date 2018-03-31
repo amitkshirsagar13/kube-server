@@ -1,0 +1,11 @@
+server: 
+  address: ${HOSTNAME:localhost.shinigami.io}
+  port: ${VPORT:8989}
+  context-path: /
+spring:
+  data:
+    mongodb:
+      host: ${VMONGOHOST:mongo}
+      port: ${VMONGOPORT:27017}
+      database: ${VMONGOCOLLECTION:message}
+  

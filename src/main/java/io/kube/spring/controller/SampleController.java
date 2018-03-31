@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.kube.spring.data.HelloWorld;
+import io.kube.spring.data.Response;
 import io.kube.spring.service.MessageService;
 
 /**
@@ -43,12 +44,12 @@ public class SampleController {
 	private MessageService messageService;
 
 	@RequestMapping(value = "/api/hello", method = RequestMethod.GET, produces = "application/json")
-	public HelloWorld list(@RequestParam(name = "name") String name) throws Exception {
+	public Response<HelloWorld> list(@RequestParam(name = "name") String name) throws Exception {
 		return messageService.save(new HelloWorld().setName(name));
 	}
 
 	@RequestMapping(value = "/api/listAll", method = RequestMethod.GET, produces = "application/json")
-	public List<HelloWorld> list() throws Exception {
+	public Response<List<HelloWorld>> list() throws Exception {
 		return messageService.findAll();
 	}
 
