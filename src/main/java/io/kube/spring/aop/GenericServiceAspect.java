@@ -40,17 +40,8 @@ public class GenericServiceAspect {
 	@Value("${server.port}")
 	private String serverPort = null;
 
-	@Around("execution(public * *.service.*save(..))")
-	public Response aroundSaveResponse(ProceedingJoinPoint pjp) {
-		return populateResponseStats(pjp);
-	}
-
-	@Around("execution(public * *.service.*find*(..))")
-	public Response aroundFindResponse(ProceedingJoinPoint pjp) {
-		return populateResponseStats(pjp);
-	}
-
-	private Response populateResponseStats(ProceedingJoinPoint pjp) {
+	@Around("execution(public * io.kube.spring.service.*.*(..))")
+	public Response aroundServiceResponse(ProceedingJoinPoint pjp) {
 		Response response = null;
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();

@@ -3,6 +3,7 @@
  */
 package io.kube.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class MessageService {
 
 	public Response<List<HelloWorld>> findAll() {
 		List<HelloWorld> helloWorldList = repository.findAll();
+		return new Response().setBaseResponse(helloWorldList);
+	}
+
+	public Response<List<HelloWorld>> findDummy() {
+		List<HelloWorld> helloWorldList = new ArrayList<>();
 		return new Response().setBaseResponse(helloWorldList);
 	}
 

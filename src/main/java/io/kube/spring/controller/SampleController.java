@@ -53,4 +53,9 @@ public class SampleController {
 		return messageService.findAll();
 	}
 
+	@RequestMapping(value = "/api/listDummy", method = RequestMethod.GET, produces = "application/json")
+	public Response<List<HelloWorld>> listDummy() throws Exception {
+		return messageService.findDummy();
+	}
+
 }
