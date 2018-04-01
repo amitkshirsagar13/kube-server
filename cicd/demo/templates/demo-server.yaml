@@ -18,10 +18,15 @@ spec:
         image: "amitkshirsagar13/{{.Values.application}}:{{.Values.commit}}"
         ports:
         - containerPort: 8989
-#        resources:
-#          requests:
-#            cpu: 100m
-#            memory: 100Mi
+        env:
+        - name: VCONFIGHOST
+          value: kube-eureka
+        - name: VCONFIGPORT
+          value: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
 ---
 apiVersion: v1
 kind: Service
