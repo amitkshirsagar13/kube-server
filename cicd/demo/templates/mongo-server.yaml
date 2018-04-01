@@ -63,7 +63,7 @@ spec:
   type: NodePort
   ports:
     - port: 27017
-      nodePort: 37017
+      nodePort: 32017
   selector:
     name: mongo
 ---
