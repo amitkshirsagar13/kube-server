@@ -4,4 +4,4 @@ FROM openjdk:8-jre-alpine
 COPY target/springdemo-0.0.1-SNAPSHOT.jar /app.jar
 EXPOSE 8989
 # specify default command
-CMD ["/usr/bin/java", "-jar", "-Dspring.profiles.active=test", "/app.jar"]
+CMD ["/usr/bin/java", "-jar", "-Dspring.profiles.active=dev", "/app.jar"]
