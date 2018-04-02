@@ -1,4 +1,5 @@
 server: 
+  display-name: ${VHOSTNAME:${HOSTNAME:localhost.shinigami.io}}
   address: ${HOSTNAME:localhost.shinigami.io}
   port: ${VPORT:8989}
   context-path: /
@@ -8,4 +9,3 @@ spring:
       host: ${VMONGOHOST:mongo}
       port: ${VMONGOPORT:27017}
       database: ${VMONGOCOLLECTION:message}
-  
