@@ -29,6 +29,10 @@ spec:
           value: "8761"
         - name: VEUREKAPORT
           value: "8761"
+        - name: VSECUREPORT
+          value: "443"
+        - name: VNONSECUREPORT
+          value: "80"
         resources:
           requests:
             cpu: 100m
