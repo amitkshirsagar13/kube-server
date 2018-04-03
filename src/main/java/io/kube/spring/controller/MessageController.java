@@ -45,6 +45,7 @@ public class MessageController {
 
 	@RequestMapping(value = "/api/message", method = RequestMethod.GET, produces = "application/json")
 	public Response<Message> list(@RequestParam(name = "name") String name) throws Exception {
+		log4j.info("Called Kube Server controller");
 		return messageService.save(new Message().setName(name));
 	}
 

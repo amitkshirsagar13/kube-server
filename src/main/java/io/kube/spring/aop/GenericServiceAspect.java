@@ -51,7 +51,12 @@ public class GenericServiceAspect {
 
 		}
 		stopWatch.stop();
-		response.setResponseTime(stopWatch.getTotalTimeMillis()).setServer(serverName).setPort(serverPort);
+		if (response != null) {
+			response.setResponseTime(stopWatch.getTotalTimeMillis()).setServer(serverName).setPort(serverPort);
+		} else {
+			response = new Response<>().setResponseTime(stopWatch.getTotalTimeMillis()).setServer(serverName)
+					.setPort(serverPort).addError("Failed to get Response for some reason...");
+		}
 		return response;
 	}
 

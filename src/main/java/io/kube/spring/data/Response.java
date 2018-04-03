@@ -3,6 +3,9 @@
  */
 package io.kube.spring.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  * <b>Overview:</b>
@@ -26,6 +29,7 @@ public class Response<T> {
 	private long responseTime;
 	private String server;
 	private String port;
+	private List<String> errorList;
 	private T baseResponse;
 
 	/**
@@ -89,6 +93,30 @@ public class Response<T> {
 	 */
 	public Response setBaseResponse(T baseResponse) {
 		this.baseResponse = baseResponse;
+		return this;
+	}
+
+	/**
+	 * @return the errorList
+	 */
+	public List<String> getErrorList() {
+		if (errorList == null) {
+			errorList = new ArrayList<>();
+		}
+		return errorList;
+	}
+
+	/**
+	 * @param errorList
+	 *            the errorList to set
+	 */
+	public Response setErrorList(List<String> errorList) {
+		this.errorList = errorList;
+		return this;
+	}
+
+	public Response addError(String message) {
+		getErrorList().add(message);
 		return this;
 	}
 
