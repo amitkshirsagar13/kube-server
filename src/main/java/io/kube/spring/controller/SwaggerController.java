@@ -30,7 +30,7 @@ public class SwaggerController {
 	/**
 	 * log4j object for debugging.
 	 */
-	private static Logger log4j = Logger.getLogger(MessageController.class);
+	private static Logger log4j = Logger.getLogger(SwaggerController.class);
 
 	@RequestMapping(value = "/swagger", method = RequestMethod.GET)
 	public ModelAndView swaggerui() {
