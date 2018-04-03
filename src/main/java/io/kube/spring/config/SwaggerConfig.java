@@ -45,7 +45,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("RDS Api", "RDS API description.", "API RDS", "Terms of service",
+		return new ApiInfo("Kube Api", "Kube Server API description.", "API Kube", "Terms of service",
 				new Contact("Amit Kshirsagar", "www.rds.com", "amit_kshirsagar@infosys.com"), "License of API",
 				"API license URL", Collections.emptyList());
 	}
