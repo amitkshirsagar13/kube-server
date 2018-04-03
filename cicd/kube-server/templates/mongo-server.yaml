@@ -3,6 +3,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: mongo-{{.Values.branch}}-persistent-storage
+  namespace: {{.Values.branch}}
   labels:
     type: local
 spec:
@@ -17,6 +18,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mongo-{{.Values.branch}}-persistent-storage-claim
+  namespace: {{.Values.branch}}
 spec:
   accessModes:
     - ReadWriteOnce
