@@ -7,6 +7,7 @@ metadata:
   labels:
     type: local
 spec:
+  storageClassName: manual
   capacity:
     storage: 3Gi
   accessModes:
@@ -20,6 +21,7 @@ metadata:
   name: mongo-{{.Values.branch}}-persistent-storage-claim
   namespace: {{.Values.branch}}
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
