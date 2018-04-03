@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  * 
  * <pre>
- * &#64;projectName rds
+ * &#64;projectName kube-server
  * Creation date: Mar 13, 2018
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
@@ -30,7 +30,7 @@ public class SwaggerController {
 	/**
 	 * log4j object for debugging.
 	 */
-	private static Logger log4j = Logger.getLogger(SampleController.class);
+	private static Logger log4j = Logger.getLogger(MessageController.class);
 
 	@RequestMapping(value = "/swagger", method = RequestMethod.GET)
 	public ModelAndView swaggerui() {

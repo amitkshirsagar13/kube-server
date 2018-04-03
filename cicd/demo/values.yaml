@@ -1,4 +1,5 @@
-scale: 2
-application: demo-server
+profile: dev
 branch: dev
+scale: 1
+application: kube-server
 commit: latest

@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
  * 
  * 
  * <pre>
- * &#64;projectName rds
+ * &#64;projectName kube-server
  * Creation date: Mar 13, 2018
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
@@ -21,7 +21,7 @@ import org.springframework.data.annotation.Id;
  * </pre>
  */
 
-public class HelloWorld {
+public class Message {
 	@Id
 	private String id;
 	private String name;
@@ -38,7 +38,7 @@ public class HelloWorld {
 	 * @param name
 	 *            the name to set
 	 */
-	public HelloWorld setName(String name) {
+	public Message setName(String name) {
 		this.name = name;
 		return this;
 	}

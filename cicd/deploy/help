@@ -1,4 +1,0 @@
-Helm has some magic to pass below Values
-
-{{ .Release.Name }} Should be passed as {BranchName}
-{{ .Project.Name }} Should be passed as {demo.{projectname}} where {projectname} is GCP Project name

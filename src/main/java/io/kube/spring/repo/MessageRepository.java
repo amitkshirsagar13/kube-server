@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import io.kube.spring.data.HelloWorld;
+import io.kube.spring.data.Message;
 
 /**
  * 
@@ -25,10 +25,10 @@ import io.kube.spring.data.HelloWorld;
  * 
  * </pre>
  */
-public interface MessageRepository extends Repository<HelloWorld, String> {
+public interface MessageRepository extends Repository<Message, String> {
 
-	List<HelloWorld> findAll();
+	List<Message> findAll();
 
-	HelloWorld save(HelloWorld saved);
+	Message save(Message saved);
 
 }

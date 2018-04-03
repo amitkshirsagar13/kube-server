@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kube.spring.data.HelloWorld;
+import io.kube.spring.data.Message;
 import io.kube.spring.data.Response;
 import io.kube.spring.service.MessageService;
 
@@ -20,7 +20,7 @@ import io.kube.spring.service.MessageService;
  * 
  * 
  * <pre>
- * &#64;projectName rds
+ * &#64;projectName kube-server
  * Creation date: Mar 13, 2018
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
@@ -33,28 +33,28 @@ import io.kube.spring.service.MessageService;
  */
 @RestController
 @RequestMapping(value = "/rest")
-public class SampleController {
+public class MessageController {
 
 	/**
 	 * log4j object for debugging.
 	 */
-	private static Logger log4j = Logger.getLogger(SampleController.class);
+	private static Logger log4j = Logger.getLogger(MessageController.class);
 
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "/api/hello", method = RequestMethod.GET, produces = "application/json")
-	public Response<HelloWorld> list(@RequestParam(name = "name") String name) throws Exception {
-		return messageService.save(new HelloWorld().setName(name));
+	@RequestMapping(value = "/api/message", method = RequestMethod.GET, produces = "application/json")
+	public Response<Message> list(@RequestParam(name = "name") String name) throws Exception {
+		return messageService.save(new Message().setName(name));
 	}
 
 	@RequestMapping(value = "/api/listAll", method = RequestMethod.GET, produces = "application/json")
-	public Response<List<HelloWorld>> list() throws Exception {
+	public Response<List<Message>> list() throws Exception {
 		return messageService.findAll();
 	}
 
 	@RequestMapping(value = "/api/listDummy", method = RequestMethod.GET, produces = "application/json")
-	public Response<List<HelloWorld>> listDummy() throws Exception {
+	public Response<List<Message>> listDummy() throws Exception {
 		return messageService.findDummy();
 	}
 

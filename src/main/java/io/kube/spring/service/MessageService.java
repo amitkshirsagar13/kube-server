@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.kube.spring.data.HelloWorld;
+import io.kube.spring.data.Message;
 import io.kube.spring.data.Response;
 import io.kube.spring.repo.MessageRepository;
 
@@ -37,17 +37,17 @@ public class MessageService {
 	@Autowired
 	private MessageRepository repository;
 
-	public Response<List<HelloWorld>> findAll() {
-		List<HelloWorld> helloWorldList = repository.findAll();
-		return new Response().setBaseResponse(helloWorldList);
+	public Response<List<Message>> findAll() {
+		List<Message> messageList = repository.findAll();
+		return new Response().setBaseResponse(messageList);
 	}
 
-	public Response<List<HelloWorld>> findDummy() {
-		List<HelloWorld> helloWorldList = new ArrayList<>();
-		return new Response().setBaseResponse(helloWorldList);
+	public Response<List<Message>> findDummy() {
+		List<Message> messageList = new ArrayList<>();
+		return new Response().setBaseResponse(messageList);
 	}
 
-	public Response save(HelloWorld message) {
+	public Response save(Message message) {
 		message = repository.save(message);
 		return new Response().setBaseResponse(message);
 	}

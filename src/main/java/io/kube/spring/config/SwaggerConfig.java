@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * 
  * <pre>
- * &#64;projectName rds
+ * &#64;projectName kube-server
  * Creation date: Mar 13, 2018
  * &#64;author Amit Kshirsagar
  * &#64;version 1.0
