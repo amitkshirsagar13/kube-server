@@ -76,8 +76,9 @@ public class MessageService {
 		return new Response().setBaseResponse(messageList);
 	}
 
-	public Response alternateControllerMethod() {
-		return new Response().addError("Mongodb not available...Failing over....alternateListControllerMethod")
+	public Response alternateControllerMethod(Throwable e) {
+		return new Response()
+				.addError("Mongodb not available...Failing over....alternateListControllerMethod:" + e.getMessage())
 				.setStatus("failure");
 	}
 
