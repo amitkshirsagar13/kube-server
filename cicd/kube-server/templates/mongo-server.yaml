@@ -44,8 +44,8 @@ spec:
       hostAliases:
        - ip: 127.0.0.1
          hostnames:
-         - {{.Values.application}}
-         - "{{.Values.application}}.{{.Values.branch}}.shinigami.io"
+         - mongo
+         - "mongo.{{.Values.branch}}.shinigami.io"
       containers:
       - image: mongo
         name: mongo
