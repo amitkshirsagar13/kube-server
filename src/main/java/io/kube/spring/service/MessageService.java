@@ -5,9 +5,12 @@ package io.kube.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import io.kube.spring.data.Message;
 import io.kube.spring.data.Response;
@@ -37,9 +40,33 @@ public class MessageService {
 	@Autowired
 	private MessageRepository repository;
 
-	public Response<List<Message>> findAll() {
+	@HystrixCommand(fallbackMethod = "alternateListControllerMethod", commandKey = "list", groupKey = "MessageServiceList")
+	public Response<List<Message>> findAll() throws Exception {
 		List<Message> messageList = repository.findAll();
+		if (getRandomNumberInRange(10, 20) > 15) {
+			throw new Exception("Artificial Test Exception");
+		}
 		return new Response().setBaseResponse(messageList);
+	}
+
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "save", groupKey = "MessageServiceSave")
+	public Response save(Message message) throws Exception {
+		if (!message.getName().contains("server")) {
+			message = repository.save(message);
+		} else {
+			throw new Exception("Artificial Test Exception");
+		}
+		return new Response().setBaseResponse(message);
+	}
+
+	private static int getRandomNumberInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
 	}
 
 	public Response<List<Message>> findDummy() {
@@ -47,9 +74,14 @@ public class MessageService {
 		return new Response().setBaseResponse(messageList);
 	}
 
-	public Response save(Message message) {
-		message = repository.save(message);
-		return new Response().setBaseResponse(message);
+	public Response alternateListControllerMethod(Throwable e) {
+		return new Response().addError("Mongodb not available...Failing over....alternateListControllerMethod")
+				.setStatus("failure");
+	}
+
+	public Response alternateControllerMethod(Message message, Throwable e) {
+		return new Response().addError("Mongodb not available...Failing over....alternateControllerMethod")
+				.setStatus("failure");
 	}
 
 }
