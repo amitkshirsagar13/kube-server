@@ -40,16 +40,18 @@ public class MessageService {
 	@Autowired
 	private MessageRepository repository;
 
-	@HystrixCommand(fallbackMethod = "alternateListControllerMethod", commandKey = "list", groupKey = "MessageServiceList")
-	public Response<List<Message>> findAll() throws Exception {
-		List<Message> messageList = repository.findAll();
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "list", groupKey = "MessageService")
+	public Response findAll() throws Exception {
+		List<Message> messageList = null;
 		if (getRandomNumberInRange(10, 20) > 15) {
 			throw new Exception("Artificial Test Exception");
+		} else {
+			messageList = repository.findAll();
 		}
 		return new Response().setBaseResponse(messageList);
 	}
 
-	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "save", groupKey = "MessageServiceSave")
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "save", groupKey = "MessageService")
 	public Response save(Message message) throws Exception {
 		if (!message.getName().contains("server")) {
 			message = repository.save(message);
@@ -74,13 +76,14 @@ public class MessageService {
 		return new Response().setBaseResponse(messageList);
 	}
 
-	public Response alternateListControllerMethod(Throwable e) {
+	public Response alternateControllerMethod() {
 		return new Response().addError("Mongodb not available...Failing over....alternateListControllerMethod")
 				.setStatus("failure");
 	}
 
 	public Response alternateControllerMethod(Message message, Throwable e) {
-		return new Response().addError("Mongodb not available...Failing over....alternateControllerMethod")
+		return new Response()
+				.addError("Mongodb not available...Failing over....alternateControllerMethod:" + e.getMessage())
 				.setStatus("failure");
 	}
 
