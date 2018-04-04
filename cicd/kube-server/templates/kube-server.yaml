@@ -27,6 +27,8 @@ spec:
           value: kube-eureka
         - name: VEUREKAPORT
           value: "8761"
+        - name: VSERVICEHOST
+          value: {{.Values.application}}
         - name: VSECUREPORT
           value: "8089"
         - name: VNONSECUREPORT
