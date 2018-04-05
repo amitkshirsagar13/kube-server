@@ -13,3 +13,4 @@ kubectl create secret tls dev --key shinigami.key --cert shinigami.crt --namespa
 kubectl create secret tls qa --key shinigami.key --cert shinigami.crt --namespace qa
 kubectl create secret tls jenkins-tls --key shinigami.key --cert shinigami.crt --namespace jenkins
 kubectl create secret tls master --key shinigami.key --cert shinigami.crt --namespace master
+kubectl create secret tls prometheus-server-tls --key shinigami.key --cert shinigami.crt 
