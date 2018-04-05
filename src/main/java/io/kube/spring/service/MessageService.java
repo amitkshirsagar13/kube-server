@@ -40,7 +40,7 @@ public class MessageService {
 	@Autowired
 	private MessageRepository repository;
 
-	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "list", groupKey = "MessageService")
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "list", groupKey = "MessageService-Server")
 	public Response findAll() throws Exception {
 		List<Message> messageList = null;
 		if (getRandomNumberInRange(10, 20) > 15) {
@@ -51,7 +51,7 @@ public class MessageService {
 		return new Response().setBaseResponse(messageList);
 	}
 
-	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "save", groupKey = "MessageService")
+	@HystrixCommand(fallbackMethod = "alternateControllerMethod", commandKey = "save", groupKey = "MessageService-Server")
 	public Response save(Message message) throws Exception {
 		if (!message.getName().contains("server")) {
 			message = repository.save(message);
