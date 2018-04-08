@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/auth-realm: Authentication Required
+    ingress.kubernetes.io/auth-secret: internal-services-auth
+    ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: ingress-monitoring
+  namespace: monitoring
+spec:
+  tls:
+  - hosts:
+    - prometheus.monitoring.shinigami.io
+    - grafana.monitoring.shinigami.io
+  - secretName: tls-cert
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+  - host: grafana.monitoring.shinigami.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 80
+  - host: prometheus.monitoring.shinigami.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
+      - path: /alertmanager
+        backend:
+          serviceName: alertmanager
+          servicePort: 9093
