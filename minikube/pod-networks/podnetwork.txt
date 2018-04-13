@@ -5,7 +5,7 @@ Depending on Network for pod your arguments might change
 - Weave:
 sudo kubeadm init
 
-sudo kubeadm init --apiserver-advertise-address
+sudo kubeadm init --apiserver-advertise-address 192.168.1.107
 
 
 mkdir -p $HOME/.kube
