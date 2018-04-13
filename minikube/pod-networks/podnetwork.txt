@@ -1,0 +1,46 @@
+To Reset Kubernetes cluster:
+sudo kubeadm reset
+
+Depending on Network for pod your arguments might change
+- Weave:
+sudo kubeadm init
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config -y
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+export kubever=$(kubectl version | base64 | tr -d '\n')
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+
+- Flannel:
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config -y
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+
+
+Join with other nodes: sudo kubeadm token create --print-join-command
+kubeadm join 10.142.0.2:6443 --token pt9pmy.oxw9sumuudub4p0d --discovery-token-ca-cert-hash sha256:4769291430a8655f2558f043856cb10d3fa3e9a3857bdb6a8914a2c155f51ff4
+
+If you want to mark master as worker use below:
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+
+Create Sample Pods and Service:
+kubectl create namespace dev
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --namespace dev --type="LoadBalancer" --target-port=8080 --port=80
+kubectl get pods,svc -n dev
+
+
+Create NGINX Ingress Controller
+sudo apt-get install dnsmasq -y
+add below at end /etc/dnsmasq.conf
+address=/k8-m.io/10.107.136.181
+#listen-address=10.107.136.181
+
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default

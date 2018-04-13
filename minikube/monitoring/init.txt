@@ -1,6 +1,9 @@
 
 helm delete --purge grafana
+kubectl delete -f node-exporter-daemonset.yml -f prometheus-config.yaml -f prometheus-deployment.yaml -f prometheus-service.yaml
+
 helm install -f values.yaml stable/grafana --name grafana --namespace monitoring
+
 
 
 kubectl create -f node-exporter-daemonset.yml -f prometheus-config.yaml -f prometheus-deployment.yaml -f prometheus-service.yaml

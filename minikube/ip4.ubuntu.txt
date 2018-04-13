@@ -1,0 +1,37 @@
+sudo hostnamectl set-hostname k8-m
+
+Install Cockpit Service
+sudo apt-get install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines
+sudo systemctl enable --now cockpit.socket
+
+Setup NGINX:
+sudo apt-get install -y nginx
+sudo systemctl enable --now nginx
+
+sudo mkdir /etc/nginx/k8-m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt
+
+To Disable Filrewall:
+sudo ufw enable
+sudo ufw disable
+sudo systemctl disable firewalld iptables iptables-service iptables-services && sudo systemctl stop firewalld iptables iptables-service iptables-services
+
+Disable Ipv6:
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+sudo vi /etc/sysctl.conf
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+
+Setup kubeadm for Master and Node
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+&& echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list \
+&& sudo apt-get update && sudo apt-get install kubelet kubeadm kubernetes-cni docker.io -y && sudo apt autoremove -y \
+&& sudo systemctl start docker && sudo systemctl enable docker
+
+Install Helm:
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz && tar -zxvf helm-v2.8.2-linux-amd64.tar.gz && cp li*/helm . && rm -R lin* helm-*
+PATH=$HOME:$PATH

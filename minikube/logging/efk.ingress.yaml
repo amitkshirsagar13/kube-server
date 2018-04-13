@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/tls-acme: "true"
+  name: efk.nginx
+  namespace: kube-system
+spec:
+  tls:
+  - hosts:
+    - kibana.kube-system.shinigami.io
+    - elast.kube-system.shinigami.io
+  - secretName: tls-cert
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: kibana.kube-system.shinigami.io
+      http:
+        paths:
+          - backend:
+              serviceName: kibana-logging
+              servicePort: 5601
+            path: /
+    - host: elast.kube-system.shinigami.io
+      http:
+        paths:
+          - backend:
+              serviceName: elasticsearch-logging
+              servicePort: 9200
+            path: /
