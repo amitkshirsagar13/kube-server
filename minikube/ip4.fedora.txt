@@ -1,11 +1,11 @@
 sudo hostnamectl set-hostname k8-m
 
 Install Cockpit Service
-sudo dnf install cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes
+sudo dnf install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes
 sudo systemctl enable --now cockpit.socket
 
 Setup NGINX:
-sudo apt-get install -y nginx
+sudo dnf install -y nginx
 sudo systemctl enable --now nginx
 
 sudo mkdir /etc/nginx/k8-m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
@@ -25,7 +25,12 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 
+netstat -nlp
 
 Setup kubeadm for Master and Node
 sudo dnf remove kubelet kubeadm kubernetes-cni docker.io apt-transport-https -y
 sudo dnf install kubelet kubeadm kubernetes-cni docker.io apt-transport-https -y
+
+Install Helm:
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz && tar -zxvf helm-v2.8.2-linux-amd64.tar.gz && cp li*/helm . && rm -R lin* helm-*
+PATH=$HOME:$PATH
