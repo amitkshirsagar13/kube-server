@@ -1,0 +1,7 @@
+#!/bin/sh
+PWD=`pwd`
+cd $HOME/bin
+sed -e "s;XNAMESPACE;$2;g" -e "s;XNAME;$3;g" template/$1.yml |tee $PWD/$1.yml
+#rm $1.yml
+cd $PWD
+apply $1.yml

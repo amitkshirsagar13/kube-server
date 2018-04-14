@@ -5,3 +5,4 @@ kubectl create namespace dev
 
 kubectl create secret tls tls-cert --key tls.key --cert tls.crt
 kubectl create secret tls dev --key tls.key --cert tls.crt --namespace dev
+kubectl create secret tls dashboard --key tls.key --cert tls.crt --namespace dashboard

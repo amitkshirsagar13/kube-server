@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -5,21 +6,21 @@ metadata:
     nginx.ingress.kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/tls-acme: "true"
-  name: default.nginx
-  namespace: kube-system
+  name: dev.kubedash
+  namespace: dashboard
 spec:
   tls:
   - hosts:
-    - kubedash.kube-system.shinigami.io
-  - secretName: tls-cert
+    - kubedash.dev.gcp.k8m.io
+  - secretName: dashboard
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: kubedash.kube-system.shinigami.io
+    - host: kubedash.dev.gcp.k8m.io
       http:
         paths:
           - backend:
-              serviceName: kubernetes-dashboard
-              servicePort: 80
+              serviceName: kubedash-kubernetes-dashboard
+              servicePort: 443
             path: /
