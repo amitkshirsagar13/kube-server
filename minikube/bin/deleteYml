@@ -2,4 +2,4 @@
 sed -e "s;XNAMESPACE;$2;g" -e "s;XNAME;$3;g" $HOME/bin/template/$1.yml |tee $1.$2.$3.yml
 #rm $1.$2.$3.yml
 cd $PWD
-apply $1.$2.$3.yml
+dpply $1.$2.$3.yml
