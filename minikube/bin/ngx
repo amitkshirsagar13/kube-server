@@ -1,0 +1,5 @@
+#!/bin/sh
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
+kubectl create -f echoserver.ingress.yml
+echoserver dev

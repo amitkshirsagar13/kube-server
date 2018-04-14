@@ -1,4 +1,4 @@
-sudo hostnamectl set-hostname k8-m
+sudo hostnamectl set-hostname k8m
 
 Install Cockpit Service
 sudo apt-get install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines
@@ -8,8 +8,15 @@ Setup NGINX:
 sudo apt-get install -y nginx
 sudo systemctl enable --now nginx
 
-sudo mkdir /etc/nginx/k8-m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
+sudo mkdir /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt
+
+sudo vi /etc/nginx/nginx.conf
+add include /etc/nginx/k8m/k8m.conf;
+
+sudo vi /etc/nginx/k8m/k8m.conf
+
+sudo systemctl restart nginx
 
 To Disable Filrewall:
 sudo ufw enable
@@ -27,8 +34,8 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 
 
 Setup kubeadm for Master and Node
-sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-&& echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list \
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
+&& echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
 && sudo apt-get update && sudo apt-get install kubelet kubeadm kubernetes-cni docker.io -y && sudo apt autoremove -y \
 && sudo systemctl start docker && sudo systemctl enable docker
 
