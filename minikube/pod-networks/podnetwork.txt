@@ -5,6 +5,9 @@ Depending on Network for pod your arguments might change
 - Weave:
 sudo kubeadm init
 
+sudo kubeadm init --apiserver-advertise-address 192.168.1.107
+
+
 mkdir -p $HOME/.kube
 sudo rm $HOME/.kube/config
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
