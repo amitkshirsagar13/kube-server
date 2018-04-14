@@ -53,7 +53,7 @@ helm install --name nginx  --namespace nginx stable/nginx-ingress --set controll
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
 
 
-895o8w68kbd9m1c78tt7a5mfyamfemeq
+895amogho8w68kbd9m1c78tt7a5mfyamfemeq
 
 
-curl -Ls https://get.weave.works | sh -s -- --token=895o8w68kbd9m1c78tt7a5mfyamfemeq
+curl -Ls https://get.weave.works | sh -s -- --token=895amogho8w68kbd9m1c78tt7a5mfyamfemeq

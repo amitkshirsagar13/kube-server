@@ -10,13 +10,22 @@ metadata:
 spec:
   tls:
   - hosts:
-    - echoserver.dev.k8-m.io
+    - echoserver.dev.gcp.k8m.io
+    - echoserver.dev.k8m.io
   - secretName: dev
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: echoserver.dev.k8-m.io
+    - host: echoserver.dev.gcp.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
+
+    - host: echoserver.dev.k8m.io
       http:
         paths:
           - backend:

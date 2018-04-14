@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -Ls https://get.weave.works | sh -s -- --token=$1
