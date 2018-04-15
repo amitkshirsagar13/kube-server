@@ -3,6 +3,11 @@
 Install 7z Package extractor:
 ```
 sudo apt-get install p7zip-full -y
+
+or
+
+sudo dnf install p7zip -y
+
 ```
 Run below in command prompt from Home directory
 ```
