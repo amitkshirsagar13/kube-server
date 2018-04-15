@@ -1,5 +1,7 @@
 sudo hostnamectl set-hostname k8-m
 
+sudo dnf install p7zip -y
+
 Install Cockpit Service
 sudo dnf install -y cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes
 sudo systemctl enable --now cockpit.socket
@@ -28,9 +30,19 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 netstat -nlp
 
 Setup kubeadm for Master and Node
-sudo dnf remove kubelet kubeadm kubernetes-cni docker.io apt-transport-https -y
-sudo dnf install kubelet kubeadm kubernetes-cni docker.io apt-transport-https -y
+sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+sudo dnf remove kubelet kubeadm kubernetes-cni docker-io -y
+sudo dnf install kubelet kubeadm kubernetes-cni docker-io -y
 
 Install Helm:
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.8.2-linux-amd64.tar.gz && tar -zxvf helm-v2.8.2-linux-amd64.tar.gz && cp li*/helm . && rm -R lin* helm-*
-PATH=$HOME:$PATH
+sudo apt-get install p7zip-full -y
+curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh

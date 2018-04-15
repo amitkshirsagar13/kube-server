@@ -1,0 +1,6 @@
+#!/bin/sh
+kubectl delete PersistentVolumeClaim jenkins
+kubectl delete Secret jenkins
+helm delete --purge jenkins
+helm install --name jenkins --namespace jenkins stable/jenkins
+kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
