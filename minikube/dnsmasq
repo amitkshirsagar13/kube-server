@@ -2,13 +2,11 @@
 set -e
 
 # Raspberry Pi dnsmasq script
-# Stephen Wood
-# www.heystephenwood.com
 # 
-# Usage: $ sudo ./raspberrypi_dnsmasq
+# Usage: $ sudo ./raspberrypi
 #
 # Net install:
-#   $ curl https://raw.github.com/stephendotexe/raspberrypi/master/roles/dnsmasq_server | sudo sh
+#   $ curl https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/dnsmasq | sudo sh
 
 # Must be run as root
 if [[ `whoami` != "root" ]]
@@ -20,12 +18,10 @@ fi
 apt-get install -y dnsmasq
 cat - > /etc/dnsmasq.conf <<DNSMASQCONF
 # Dnsmasq.conf for raspberry pi    
-# By Stephen Wood heystephenwood.com  
 # Full examples found here:  
-# http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq.conf.example  
  
 # Set up your local domain here    
-domain=raspberry.local    
+domain=raspomatic   
 resolv-file=/etc/resolv.dnsmasq  
 min-port=4096   
 server=8.8.8.8
