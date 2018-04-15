@@ -1,9 +1,3 @@
 #!/bin/sh
-if [ ! -z "$1" ]
-then
-	kubectl get pods --namespace $1
-else
-	kubectl get pods --all-namespaces
-fi
-
-
+#echo $(basename $0)
+sed -e "s;XENTITY;$(basename $0);g" kube-template|sh -s "$@"

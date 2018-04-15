@@ -1,0 +1,2 @@
+#!/bin/sh
+sed -e "s;XENTITY;$0;g" kube-template|sh "$@"

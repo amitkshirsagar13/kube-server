@@ -1,13 +1,3 @@
 #!/bin/sh
-if [ ! -z "$1"]
-then
-	if [ ! -z "$2"]
-	then
-		kubectl describe ing $1 --namespace $2
-	else
-		kubectl get ing --namespace $1
-	fi
-else
-	kubectl describe ing --all-namespaces
-fi
-
+#echo $(basename $0)
+sed -e "s;XENTITY;$(basename $0);g" kube-template|sh -s "$@"
