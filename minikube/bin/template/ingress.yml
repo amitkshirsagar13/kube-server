@@ -10,16 +10,16 @@ metadata:
 spec:
   tls:
   - hosts:
-    - XHOSTNAME
-  - secretName: XSERVICE
+    - XHOST
+  - secretName: XSECRET
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: XHOSTNAME
+    - host: XHOST
       http:
         paths:
           - backend:
-              serviceName: XSERVICENAME
-              servicePort: XSERVICEPORT
+              serviceName: XSERVICE
+              servicePort: XPORT
             path: /
