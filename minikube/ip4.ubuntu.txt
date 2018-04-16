@@ -40,5 +40,6 @@ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
 && sudo systemctl start docker && sudo systemctl enable docker
 
 Install Helm:
+sudo apt-get install dkms
 sudo apt-get install p7zip-full -y
 curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh

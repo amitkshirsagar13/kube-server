@@ -90,17 +90,16 @@ metadata:
 spec:
   tls:
   - hosts:
-    - "mongo.{{.Values.branch}}.shinigami.io"
+    - "mongo.{{.Values.branch}}.k8m.io"
   - secretName: {{.Values.branch}}
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: "mongo.{{.Values.branch}}.shinigami.io"
+    - host: "mongo.{{.Values.branch}}.k8m.io"
       http:
         paths:
           - backend:
               serviceName: mongo
               servicePort: 27017
             path: /
-    
