@@ -6,37 +6,37 @@ metadata:
     nginx.ingress.kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/tls-acme: "true"
-  name: jenkins
-  namespace: jenkins
+  name: kubedash
+  namespace: kube-system
 spec:
   tls:
   - hosts:
-    - jenkins.jenkins.gce.k8m.io
-    - jenkins.jenkins.gke.k8m.io
-    - jenkins.jenkins.mini.k8m.io
-  - secretName: jenkins
+    - kubedash.gce.k8m.io
+    - kubedash.gke.k8m.io
+    - kubedash.mini.k8m.io
+  - secretName: tls
   backend:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-    - host: jenkins.jenkins.gce.k8m.io
+    - host: kubedash.gce.k8m.io
       http:
         paths:
           - backend:
-              serviceName: jenkins
-              servicePort: 8080
+              serviceName: kubernetes-dashboard
+              servicePort: 80
             path: /
-    - host: jenkins.jenkins.gke.k8m.io
+    - host: kubedash.gke.k8m.io
       http:
         paths:
           - backend:
-              serviceName: jenkins
-              servicePort: 8080
+              serviceName: kubernetes-dashboard
+              servicePort: 80
             path: /
-    - host: jenkins.jenkins.mini.k8m.io
+    - host: kubedash.mini.k8m.io
       http:
         paths:
           - backend:
-              serviceName: jenkins
-              servicePort: 8080
+              serviceName: kubernetes-dashboard
+              servicePort: 80
             path: /
