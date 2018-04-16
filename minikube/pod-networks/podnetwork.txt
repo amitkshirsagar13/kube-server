@@ -59,7 +59,7 @@ kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceacc
 Weave Cloud Monitoring
 curl -Ls https://get.weave.works | sh -s -- --token=895amogho8w68kbd9m1c78tt7a5mfyamfemeq
 or
-helm install --name weave-cloud --namespace kube-system --set ServiceToken=<YOUR_WEAVE_CLOUD_SERVICE_TOKEN> stable/weave-cloud
+helm install --name weave-cloud --namespace kube-system --set ServiceToken=895amogho8w68kbd9m1c78tt7a5mfyamfemeq stable/weave-cloud
 
 helm delete --purge kubedash
 helm delete --purge weave-scope
