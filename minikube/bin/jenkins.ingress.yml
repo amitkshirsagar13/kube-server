@@ -11,21 +11,28 @@ metadata:
 spec:
   tls:
   - hosts:
-    - jenkins.dev.gcp.k8m.io
+    - jenkins.dev.gce.k8m.io
+    - jenkins.dev.gke.k8m.io
     - jenkins.dev.k8m.io
   - secretName: jenkins
   backend:
-    serviceName: echoserver
-    servicePort: 8080
+    serviceName: default-http-backend
+    servicePort: 80
   rules:
-    - host: jenkins.dev.gcp.k8m.io
+    - host: jenkins.dev.gce.k8m.io
       http:
         paths:
           - backend:
               serviceName: jenkins
               servicePort: 8080
             path: /
-
+  - host: jenkins.dev.gke.k8m.io
+    http:
+      paths:
+        - backend:
+            serviceName: jenkins
+            servicePort: 8080
+          path: /
     - host: jenkins.dev.k8m.io
       http:
         paths:
