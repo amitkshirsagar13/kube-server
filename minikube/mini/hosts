@@ -1,0 +1,54 @@
+127.0.0.1 localhost localhost.shinigami.io localhost.jenkins.io mongo shinigami.local shinigami
+
+192.168.1.150 cockpit.dev.k8m.io dev.k8m.io echoserver.dev.k8m.io
+192.168.1.150 master.k8m.io
+
+#Local Minikube Entries
+127.0.0.1 	jenkins.jenkins.mini.k8m.io mini.k8m.io api.mini.k8m.io cockpit.mini.k8m.io kubedash.mini.k8m.io echoserver.dev.mini.k8m.io
+127.0.0.1 	weavedash.dev.mini.k8m.io dev.mini.k8m.io
+# GCE Cluster Entries
+35.229.73.65 	jenkins.jenkins.gce.k8m.io  gce.k8m.io  api.gce.k8m.io  cockpit.gce.k8m.io  kubedash.gce.k8m.io  echoserver.dev.gce.k8m.io
+35.229.73.65 	weavedash.dev.gce.k8m.io dev.gce.k8m.io
+# GKE Cluster Entries
+35.192.157.61	jenkins.jenkins.gke.k8m.io  gke.k8m.io  api.gke.k8m.io  cockpit.gke.k8m.io  kubedash.gke.k8m.io  echoserver.dev.gke.k8m.io
+35.192.157.61	weavedash.dev.gke.k8m.io dev.gke.k8m.io
+
+#Application Domains: Change ip to point right environment
+
+#master Branch
+127.0.0.1 	kube-eureka.master.k8m.io kube-server.master.k8m.io kube-front.master.k8m.io kube-hystrix.master.k8m.io
+#35.229.73.65 	kube-eureka.master.k8m.io kube-server.master.k8m.io kube-front.master.k8m.io kube-hystrix.master.k8m.io
+#35.192.157.61 	kube-eureka.master.k8m.io kube-server.master.k8m.io kube-front.master.k8m.io kube-hystrix.master.k8m.io
+
+#dev Branch
+127.0.0.1 	kube-eureka.dev.k8m.io kube-server.dev.k8m.io kube-front.dev.k8m.io kube-hystrix.dev.k8m.io
+#35.229.73.65 	kube-eureka.dev.k8m.io kube-server.dev.k8m.io kube-front.dev.k8m.io kube-hystrix.dev.k8m.io
+#35.192.157.61 	kube-eureka.dev.k8m.io kube-server.dev.k8m.io kube-front.dev.k8m.io kube-hystrix.dev.k8m.io
+
+#test Branch
+127.0.0.1 	kube-eureka.test.k8m.io kube-server.test.k8m.io kube-front.test.k8m.io kube-hystrix.test.k8m.io
+#35.229.73.65 	kube-eureka.test.k8m.io kube-server.test.k8m.io kube-front.test.k8m.io kube-hystrix.test.k8m.io
+#35.192.157.61 	kube-eureka.test.k8m.io kube-server.test.k8m.io kube-front.test.k8m.io kube-hystrix.test.k8m.io
+
+
+
+
+
+
+192.168.99.100 minikube.shinigami.io kube-server kube-front
+192.168.1.123 ubuntu.shinigami.io
+192.168.1.111 raspomatic
+
+127.0.0.1 jenkins.jenkins.shinigami.io kubedash.kube-system.shinigami.io kube-state-metrics.kube-system.shinigami.io
+127.0.0.1 kibana.kube-system.shinigami.io elast.kube-system.shinigami.io
+127.0.0.1 prometheus.monitoring.shinigami.io grafana.monitoring.shinigami.io
+
+127.0.0.1 echoserver.dev.shinigami.io demo-server.dev.shinigami.io demo.dev.shinigami.io kube-eureka.dev.shinigami.io
+
+127.0.0.1 echoserver.qa.shinigami.io demo-server.qa.shinigami.io demo.qa.shinigami.io kube-eureka.qa.shinigami.io
+
+127.0.0.1 kube-eureka.master.shinigami.io kube-server.master.shinigami.io kube-front.master.shinigami.io kube-hystrix.master.shinigami.io
+
+
+
+35.185.109.96 k8-m.shinigami.io
