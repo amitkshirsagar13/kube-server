@@ -1,8 +1,12 @@
 #!/bin/sh
-kubectl delete PersistentVolumeClaim jenkins jenkins-persistent-storage-claim
+kubectl delete PersistentVolumeClaim jenkins
 kubectl delete Secret jenkins
 helm delete --purge jenkins
 #helm install --name jenkins --namespace jenkins stable/jenkins
-kubectl apply -f jenkins.pvc.yml
+kubectl apply -f $HOME/bin/jenkins.pvc.yml
+kubectl create secret tls jenkins --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt --namespace jenkins
 helm install --name jenkins --namespace jenkins stable/jenkins --set Persistence.ExistingClaim=jenkins-persistent-storage-claim
 kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+kubectl --namespace jenkins run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl expose deployment echoserver --type=NodePort --namespace jenkins
+kubectl apply -f $HOME/bin/jenkins.ingress.yml
