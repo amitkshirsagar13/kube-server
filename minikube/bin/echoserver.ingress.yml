@@ -25,13 +25,13 @@ spec:
               serviceName: echoserver
               servicePort: 8080
             path: /
-  - host: echoserver.dev.gke.k8m.io
-    http:
-      paths:
-        - backend:
-            serviceName: echoserver
-            servicePort: 8080
-          path: /
+    - host: echoserver.dev.gke.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: echoserver
+              servicePort: 8080
+            path: /
     - host: echoserver.dev.k8m.io
       http:
         paths:

@@ -26,13 +26,13 @@ spec:
               serviceName: jenkins
               servicePort: 8080
             path: /
-  - host: jenkins.dev.gke.k8m.io
-    http:
-      paths:
-        - backend:
-            serviceName: jenkins
-            servicePort: 8080
-          path: /
+    - host: jenkins.dev.gke.k8m.io
+      http:
+        paths:
+          - backend:
+              serviceName: jenkins
+              servicePort: 8080
+            path: /
     - host: jenkins.dev.k8m.io
       http:
         paths:
