@@ -9,7 +9,9 @@ sudo apt-get install -y nginx
 sudo systemctl enable --now nginx
 
 sudo mkdir /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=Shinigami IO/CN=shinigami.io"
+
+sudo systemctl restart nginx
 
 sudo vi /etc/nginx/nginx.conf
 add include /etc/nginx/k8m/k8m.conf;
