@@ -42,6 +42,8 @@ kubectl expose deployment echoserver --namespace dev --type="LoadBalancer" --tar
 kubectl get pods,svc -n dev
 
 
+ngx
+
 Create NGINX Ingress Controller
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout shinigami.key -out shinigami.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=Shinigami IO/CN=k8-m.io"
 

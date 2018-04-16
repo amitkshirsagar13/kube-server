@@ -1,6 +1,8 @@
 #!/bin/sh
-kubectl delete PersistentVolumeClaim jenkins
+kubectl delete PersistentVolumeClaim jenkins jenkins-persistent-storage-claim
 kubectl delete Secret jenkins
 helm delete --purge jenkins
-helm install --name jenkins --namespace jenkins stable/jenkins
+#helm install --name jenkins --namespace jenkins stable/jenkins
+kubectl apply -f jenkins.pvc.yml
+helm install --name jenkins --namespace jenkins stable/jenkins --set Persistence.ExistingClaim=jenkins-persistent-storage-claim
 kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
