@@ -1,0 +1,24 @@
+Init Helm:
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller --upgrade
+
+Create a Service with NodePort for Local VirtualBox to use port Forwarding.
+helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+
+Go to mini folder:
+Test nginx and ingress by using echoservers in dev namespace:
+kubectl create -f echoserver.ingress.yml
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl --namespace dev expose deployment echoserver --type=NodePort
+
+Expose kubernetes Dashboard:
+kubectl create -f kubdash.ingress.yml
+
+Expose Jenkins Dashboard:
+kubectl create -f kubdash.ingress.yml
+
+Create Jenkins Pods:
+kubectl create clusterrolebinding  --namespace jenkins jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+helm install --name jenkins --namespace jenkins stable/jenkins
+Password: kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}"
