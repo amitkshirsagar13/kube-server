@@ -79,3 +79,7 @@ uuencode .kube/config config | mail -s kubernetes k8m amit.kshirsagar.13@gmail.c
 
 getStorageClass:
 kubectl get storageclass
+
+
+
+https://kube-hystrix.master.k8m.io/hystrix/monitor?stream=http://KUBE-HYSTRIX:8080/turbine.stream
