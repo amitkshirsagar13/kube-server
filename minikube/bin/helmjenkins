@@ -8,4 +8,4 @@ helm delete --purge jenkins
 #kubectl create secret tls --namespace jenkins jenkins --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt
 kubectl create clusterrolebinding  --namespace jenkins jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
 #helm install --name jenkins --namespace jenkins stable/jenkins --set Persistence.ExistingClaim=jenkins-persistent-storage-claim
-helm install --name jenkins --namespace jenkins stable/jenkins
+helm install --name jenkins --namespace jenkins stable/jenkins --Master.ServiceType=NodePort
