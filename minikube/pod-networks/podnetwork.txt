@@ -1,6 +1,9 @@
 To Reset Kubernetes cluster:
 sudo kubeadm reset
 
+Add --cloud-provider=gce to below file:
+sudo vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
 Depending on Network for pod your arguments might change
 - Weave:
 sudo kubeadm init
@@ -17,7 +20,7 @@ export kubever=$(kubectl version | base64 | tr -d '\n')
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
 
 - Flannel:
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cloud-provider=
 
 mkdir -p $HOME/.kube
 sudo rm $HOME/.kube/config
@@ -73,3 +76,6 @@ helm install stable/kubernetes-dashboard --name kubedash --namespace kube-system
 kubectl get secrets -n kube-system
 kubectl get secret weave-net-token-xm52d -n=kube-system -o json | jq -r '.data["token"]' | base64 -d
 uuencode .kube/config config | mail -s kubernetes k8m amit.kshirsagar.13@gmail.com
+
+getStorageClass:
+kubectl get storageclass
