@@ -16,3 +16,20 @@ Run below in command prompt from Home directory
 ```
 curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh
 ```
+
+```
+sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
+```
+Add below to command and mount the password files.
+
+
+--basic-auth-file=/etc/kubernetes/auth.csv to 
+
+    volumeMounts:
+    - mountPath: /etc/kubernetes/auth.csv
+      name: kubernetes-dashboard
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/auth.csv
+    name: kubernetes-dashboard
