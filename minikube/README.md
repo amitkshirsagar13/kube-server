@@ -24,7 +24,8 @@ Add below to command and mount the password files.
 
 
 ```
---basic-auth-file=/etc/kubernetes/auth.csv
+    - --basic-auth-file=/etc/kubernetes/auth.csv
+    - --authorization-rbac-super-user=admin
 
 And
 
