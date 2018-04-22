@@ -23,7 +23,10 @@ sudo vi /etc/kubernetes/manifests/kube-apiserver.yaml
 Add below to command and mount the password files.
 
 
---basic-auth-file=/etc/kubernetes/auth.csv to 
+```
+--basic-auth-file=/etc/kubernetes/auth.csv
+
+And
 
     volumeMounts:
     - mountPath: /etc/kubernetes/auth.csv
@@ -33,3 +36,4 @@ Add below to command and mount the password files.
   - hostPath:
       path: /etc/kubernetes/auth.csv
     name: kubernetes-dashboard
+```
