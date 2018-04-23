@@ -1,16 +1,17 @@
 #!/bin/sh
 sudo chown poomit:poomit ~/.rnd
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout shinigami.key -out shinigami.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=Shinigami IO/CN=shinigami.io"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
 
-helm install --name kube-lego --namespace kube-system stable/kube-lego --set config.LEGO_EMAIL=amit.kshirsagar.13@gmail.com,config.LEGO_URL=https://acme-v01.api.letsencrypt.org/directory
 
 kubectl create namespace dev
 kubectl create namespace qa
 kubectl create namespace jenkins
 
-kubectl create secret tls tls-cert --key shinigami.key --cert shinigami.crt
-kubectl create secret tls dev --key shinigami.key --cert shinigami.crt --namespace dev
-kubectl create secret tls qa --key shinigami.key --cert shinigami.crt --namespace qa
-kubectl create secret tls jenkins-tls --key shinigami.key --cert shinigami.crt --namespace jenkins
-kubectl create secret tls master --key shinigami.key --cert shinigami.crt --namespace master
-kubectl create secret tls prometheus-server-tls --key shinigami.key --cert shinigami.crt 
+kubectl create secret tls tls-cert --key tls.key --cert tls.crt
+kubectl create secret tls dev --key tls.key --cert tls.crt --namespace dev
+kubectl create secret tls qa --key tls.key --cert tls.crt --namespace qa
+kubectl create secret tls jenkins-tls --key tls.key --cert tls.crt --namespace jenkins
+kubectl create secret tls master --key tls.key --cert tls.crt --namespace master
+kubectl create secret tls prometheus-server-tls --key tls.key --cert tls.crt 
+
+#helm install --name kube-lego --namespace kube-system stable/kube-lego --set config.LEGO_EMAIL=amit.kshirsagar.13@gmail.com,config.LEGO_URL=https://acme-v01.api.letsencrypt.org/directory

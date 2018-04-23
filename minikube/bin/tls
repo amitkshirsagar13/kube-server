@@ -1,8 +1,8 @@
 #!/bin/sh
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $HOME/bin/tls.key -out $HOME/bin/tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
 
 kubectl create namespace dev
 
-kubectl create secret tls tls-cert --key tls.key --cert tls.crt
-kubectl create secret tls dev --key tls.key --cert tls.crt --namespace dev
-kubectl create secret tls dashboard --key tls.key --cert tls.crt --namespace dashboard
+kubectl create secret tls tls-cert --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt
+kubectl create secret tls dev --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt --namespace dev
+kubectl create secret tls dashboard --key $HOME/bin/tls.key --cert $HOME/bin/tls.crt --namespace dashboard

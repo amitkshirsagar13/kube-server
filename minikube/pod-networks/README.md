@@ -69,11 +69,12 @@ kubectl get pods,svc -n dev
 ###### Create NGINX Ingress Controller
 - Create Certificate:
 ```
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout shinigami.key -out shinigami.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
 kubectl create secret tls tls-cert --key tls.key --cert tls.crt
 kubectl create secret tls dev --key tls.key --cert tls.crt --namespace dev
 ```
-- Install NGINX using Help
+
+- Install NGINX
 ```
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
 helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080

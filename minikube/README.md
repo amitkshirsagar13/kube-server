@@ -15,6 +15,9 @@ Run below in command prompt from Home directory
 curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh
 ```
 
+
+### Enable ApiServer access on insecure port
+
 Enable Authentication using user/password for APIServer using insecure port.
 
 ```
