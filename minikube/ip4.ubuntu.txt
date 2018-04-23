@@ -20,7 +20,7 @@ sudo vi /etc/nginx/k8m/k8m.conf
 
 sudo systemctl restart nginx
 
-To Disable Filrewall:
+To Disable Firewall:
 sudo ufw enable
 sudo ufw disable
 sudo systemctl disable firewalld iptables iptables-service iptables-services && sudo systemctl stop firewalld iptables iptables-service iptables-services
