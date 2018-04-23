@@ -57,7 +57,7 @@ sudo kubeadm join 10.142.0.2:6443 --token pt9pmy.oxw9sumuudub4p0d --discovery-to
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-###### Weave Cloud Monitoring
+##### Weave Cloud Monitoring
 ```
 curl -Ls https://get.weave.works | sh -s -- --token=895amogho8w68kbd9m1c78tt7a5mfyamfemeq
 or

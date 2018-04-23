@@ -71,7 +71,7 @@ server {
 
 server {
    listen       443 ssl http2;
-   server_name  cockpit.gcp.k8m.io;
+   server_name  cockpit.gce.k8m.io;
    #return 301 $scheme://$server_name:9090$request_uri;
    location / {
      proxy_pass http://websocket;
