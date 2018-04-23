@@ -27,17 +27,20 @@ Use helm with `LoadBalancer` for gce and `NodePort` for local cluster.
 
 ```
 kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
-helm install --name nginx --namespace nginx stable/nginx-ingress --set controller.service.type=LoadBalancer
-or
+
 helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
+
+or
+
+helm install --name nginx --namespace nginx stable/nginx-ingress --set controller.service.type=LoadBalancer
 ```
 
 ##### Test with echoservers:
 Check if everything working as expected with echoservers:
 
 ```
-kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
-kubectl expose deployment echoserver --type=NodePort --namespace dev
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.10 --port=8080
+kubectl expose deployment echoserver --namespace dev --type=NodePort
 kubectl create -f $HOME/bin/echoserver.ingress.yml
 ```
 

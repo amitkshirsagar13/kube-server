@@ -61,7 +61,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 Create Sample Pods and Service:
 ```
 kubectl create namespace dev
-kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.10 --port=8080
 kubectl expose deployment echoserver --namespace dev --type="LoadBalancer" --target-port=8080 --port=80
 kubectl get pods,svc -n dev
 ```
