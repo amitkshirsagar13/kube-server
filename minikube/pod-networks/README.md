@@ -6,8 +6,12 @@ sudo kubeadm reset
 ```
 
 If want to use gce as cloud
-Add --cloud-provider=gce to below file:
+Add `--cloud-provider=gce` to below file:
+
+
+`
 sudo vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+`
 
 Depending on Network for pod your arguments might change
 - Weave:
@@ -91,8 +95,7 @@ helm install stable/weave-scope --name weave-scope --namespace kube-system
 helm install stable/kubernetes-dashboard --name kubedash --namespace kube-system
 ```
 
-getStorageClass:
-kubectl get storageclass
+getStorageClass: `kubectl get storageclass`
 
 URL for accessing [Hystrix Turbine Stream](https://kube-hystrix.master.k8m.io/hystrix/monitor?stream=http://KUBE-HYSTRIX:8080/turbine.stream)
 
