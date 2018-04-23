@@ -57,37 +57,14 @@ sudo kubeadm join 10.142.0.2:6443 --token pt9pmy.oxw9sumuudub4p0d --discovery-to
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-
-Create Sample Pods and Service:
-```
-kubectl create namespace dev
-kubectl --namespace dev run echoserver --image=gcr.io/google_containers/echoserver:1.10 --port=8080
-kubectl expose deployment echoserver --namespace dev --type="LoadBalancer" --target-port=8080 --port=80
-kubectl get pods,svc -n dev
-```
-
-###### Create NGINX Ingress Controller
-- Create Certificate:
-```
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
-kubectl create secret tls tls-cert --key tls.key --cert tls.crt
-kubectl create secret tls dev --key tls.key --cert tls.crt --namespace dev
-```
-
-- Install NGINX
-```
-kubectl create clusterrolebinding nginx --clusterrole cluster-admin --serviceaccount=nginx:default
-helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=NodePort --set controller.service.nodePorts.https=30443 --set controller.service.nodePorts.http=30080
-or
-helm install --name nginx  --namespace nginx stable/nginx-ingress --set controller.service.type=LoadBalancer
-```
-
 ###### Weave Cloud Monitoring
 ```
 curl -Ls https://get.weave.works | sh -s -- --token=895amogho8w68kbd9m1c78tt7a5mfyamfemeq
 or
 helm install --name weave-cloud --namespace kube-system --set ServiceToken=895amogho8w68kbd9m1c78tt7a5mfyamfemeq stable/weave-cloud
 ```
+
+
 Some useful commands:
 ```
 helm delete --purge kubedash
@@ -95,6 +72,10 @@ helm delete --purge weave-scope
 helm install stable/weave-scope --name weave-scope --namespace kube-system
 helm install stable/kubernetes-dashboard --name kubedash --namespace kube-system
 ```
+
+## [Setup LoadBalancers Layer 4/7](https://github.com/amitkshirsagar13/kube-server/blob/master/minikube/bin/README.md)
+
+
 
 getStorageClass: `kubectl get storageclass`
 

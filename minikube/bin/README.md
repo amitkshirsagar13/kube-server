@@ -17,10 +17,13 @@ sudo systemctl enable --now nginx
 sudo mkdir /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
 ```
+
 Open `nginx.conf` and edit as below:
+
 ```
 sudo vi /etc/nginx/nginx.conf
 ```
+
 add ` include /etc/nginx/k8m/k8m.conf; `
 
 Finally create k8m.conf with our cluster forward rules for NGINX, this will be first Layer 4 LoadBalancer .
@@ -110,9 +113,6 @@ EOF
 sudo systemctl restart nginx
 
 ```
-
-
-
 
 ##### Initialize the Helm Environment with Tiller Pods:
 
