@@ -26,6 +26,13 @@ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
 && sudo systemctl start docker && sudo systemctl enable docker
 ```
 
+For Raspberry Pi enable cgroup memory:
+```
+sudo vi /boot/cmdline.txt
+cgroup_enable=memory cgroup_memory=1
+```
+
+
 #### Enable ApiServer access on insecure port
 
 Enable Authentication using user/password for APIServer using insecure port.
