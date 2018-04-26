@@ -33,6 +33,8 @@ cgroup_enable=memory cgroup_memory=1
 
 sudo systemctl disable dphys-swapfile
 
+curl -sSL get.docker.com | sh && \ sudo usermod pi -aG docker
+
 ```
 
 
