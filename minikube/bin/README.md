@@ -22,6 +22,19 @@ Open `nginx.conf` and edit as below:
 
 ```
 sudo vi /etc/nginx/nginx.conf
+
+
+        ##
+        # SSL Settings
+        ##
+
+        #ssl on;
+        #ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+        ssl_certificate /etc/pki/nginx/server.crt;
+        ssl_certificate_key /etc/pki/nginx/private/server.key;
+
+
 ```
 
 add ` include /etc/nginx/k8m/k8m.conf; `
