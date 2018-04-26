@@ -5,6 +5,17 @@
 sudo kubeadm reset
 ```
 
+If hostname reset required use below:
+
+```
+sudo hostname k8m.io
+sudo vi /etc/hostname
+sudo vi /etc/hosts
+sudo vi /etc/dnsmasq.conf
+sudo /etc/init.d/dnsmasq restart
+``` 
+
+
 If want to use gce as cloud
 Add `--cloud-provider=gce` to below file:
 
