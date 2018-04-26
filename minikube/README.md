@@ -15,7 +15,18 @@ Run below in command prompt from Home directory
 curl -Ls https://raw.githubusercontent.com/amitkshirsagar13/kube-server/master/minikube/deploy.sh |sed -e 's/\r$//' | sh
 ```
 
-### Enable ApiServer access on insecure port
+### Setup Kubeadm
+Setup kubeadm, kubelete, docker and kubernetes-cni.
+
+```
+Setup kubeadm for Master and Node
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
+&& echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
+&& sudo apt-get update && sudo apt-get install kubelet kubeadm kubernetes-cni docker.io -y && sudo apt autoremove -y \
+&& sudo systemctl start docker && sudo systemctl enable docker
+```
+
+#### Enable ApiServer access on insecure port
 
 Enable Authentication using user/password for APIServer using insecure port.
 
