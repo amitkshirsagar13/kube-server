@@ -27,9 +27,9 @@ sudo vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 Depending on Network for pod your arguments might change
 - Weave:
 ```
-sudo kubeadm init
+sudo kubeadm init --service-dns-domain=k8m.io
  or
-sudo kubeadm init --apiserver-advertise-address <IPADDRESS>
+sudo kubeadm init --service-dns-domain=k8m.io --apiserver-advertise-address=<IPADDRESS>
 ```
 Copy certs to allow kubectl command work properly.
 ```
