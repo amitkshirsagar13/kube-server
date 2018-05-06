@@ -3,7 +3,7 @@
 ##### Create TLS Certificate for your cluster NGINX:
 
 ```
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $HOME/bin/tls.key -out $HOME/bin/tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $HOME/bin/tls.key -out $HOME/bin/tls.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8cluster.io"
 ```
 
 ##### Install NGINX: (Layer 4 LoadBalancer)
@@ -15,7 +15,7 @@ sudo apt-get install -y nginx
 sudo systemctl enable --now nginx
 
 sudo mkdir /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8m.io"
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8cluster.io"
 ```
 
 Open `nginx.conf` and edit as below:
