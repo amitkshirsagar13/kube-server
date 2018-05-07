@@ -25,6 +25,14 @@ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
 && sudo apt-get update && sudo apt-get install kubelet kubeadm kubernetes-cni docker.io -y && sudo apt autoremove -y \
 && sudo systemctl start docker && sudo systemctl enable docker
 ```
+Allow User to execute Docker commands:
+
+```
+sudo groupadd docker
+sudo usermod -aG docker poomit
+sudo usermod -aG docker pi
+newgrp docker
+```
 
 For Raspberry Pi enable cgroup memory and disable swap:
 ```
