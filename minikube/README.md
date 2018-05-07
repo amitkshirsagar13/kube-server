@@ -21,7 +21,7 @@ Setup kubeadm, kubelete, docker and kubernetes-cni.
 ```
 Setup kubeadm for Master and Node
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - \
-&& echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
+&& echo "deb http://apt.kubernetes.io/ kubernetes-bionic main" | sudo tee /etc/apt/sources.list.d/kubernetes.list \
 && sudo apt-get update && sudo apt-get install kubelet kubeadm kubernetes-cni docker.io -y && sudo apt autoremove -y \
 && sudo systemctl start docker && sudo systemctl enable docker
 ```
