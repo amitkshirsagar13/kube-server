@@ -10,11 +10,11 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        echo "Building Project...
+        echo "Building Project..."
       }
     }
     stage("release") {
-      echo "Building release...
+      echo "Building release..."
     }
   }
 }
