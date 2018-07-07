@@ -14,7 +14,9 @@ pipeline {
       }
     }
     stage("release") {
-      echo "Building release..."
+      steps {
+        echo "Building Release..."
+      }
     }
   }
 }
