@@ -14,7 +14,7 @@ Process for installing nginx on host machine and then pass request to NGINX ingr
 sudo apt-get install -y nginx
 sudo systemctl enable --now nginx
 
-sudo mkdir /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
+sudo mkdir -p /etc/nginx/k8m /etc/pki /etc/pki/nginx /etc/pki/nginx/private
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/nginx/private/server.key -out /etc/pki/nginx/server.crt -subj "/C=IN/ST=Maharashtra/L=Pune/O=k8-cluster IO/CN=k8cluster.io"
 ```
 
