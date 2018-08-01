@@ -51,8 +51,8 @@ volumes: [
           sh """
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
             docker build -t amitkshirsagar13/$application:$shortGitCommit -t amitkshirsagar13/$application:latest .
-	        docker push amitkshirsagar13/$application:$shortGitCommit
-            docker push amitkshirsagar13/$application:latest
+	    //docker push amitkshirsagar13/$application:$shortGitCommit
+            //docker push amitkshirsagar13/$application:latest
             """
         }
       }
