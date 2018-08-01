@@ -52,8 +52,6 @@ volumes: [
 	    ls -ltr /var/run/docker.sock
             docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
             docker build -t amitkshirsagar13/$application:$shortGitCommit -t amitkshirsagar13/$application:latest .
-	    docker push amitkshirsagar13/$application:$shortGitCommit
-	    docker push amitkshirsagar13/$application:latest
             """
         }
       }
@@ -61,6 +59,7 @@ volumes: [
     stage('Deploy helm release') {
       echo "Project: $project | Application: $application | tag: $shortGitCommit"
       container('helm') {
+	      shortGitCommit = "latest"
     	sh "helm upgrade --install $application --namespace $gitBranch ./cicd/$application/ --set profile=$profile --set branch=$gitBranch --set commit=$shortGitCommit --set application=$application"
       }
     }
