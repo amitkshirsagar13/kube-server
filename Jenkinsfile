@@ -1,5 +1,5 @@
-def label = "worker-${UUID.randomUUID().toString()}"
-
+def lasbel = "worker-${UUID.randomUUID().toString()}"
+def label = "jenkins-slave"
 
 podTemplate(label: label, containers: [
   containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
