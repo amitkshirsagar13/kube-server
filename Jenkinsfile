@@ -10,7 +10,6 @@ podTemplate(label: label, containers: [
 ],
 volumes: [
   persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'jenkins-persistent-repository-storage-claim', readOnly: false),
-  hostPathVolume(mountPath: '/home/jenkins', hostPath: '/data/jenkins_home'),
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
   node(label) {
